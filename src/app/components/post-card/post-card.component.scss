@@ -1,0 +1,42 @@
+.post-card {
+    max-width: 60rem;
+    width: 60rem;
+}
+
+mat-card-content{
+    margin-top: 0.8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    mat-card-subtitle{
+        margin-top: 0.4rem;
+    }
+
+    padding: 1rem;
+}
+
+.title{
+    font-weight: 700;
+}
+
+.extra-info{
+    margin-top: 0.4rem;
+}
+
+mat-card-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.6rem;
+}
+
+.share-icon{
+    //visibility: hidden; //Aparecer quando o mouse passar sobre o card.
+    padding: 0.5rem;
+    border-radius: 25%;
+    color: #929292;
+}
+
+.share-icon:hover{
+    cursor: pointer;
+    background-color: #e7e7e7;
+}
