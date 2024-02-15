@@ -18,11 +18,15 @@ export class PostCardComponent {
   synopsis: string = "Sinopse do texto";
   author: string = "Autor";
   releaseDate: string = "01/10/2002";
+  
+
+  size: number = 10;
+  page: number = 0;
 
 //Passar tudo isso abaixo pra Service:
   posts: any = [];
   httpClient = inject(HttpClient);
-  url = "http://localhost:8080/post";
+  url = `http://localhost:8080/post?size=${this.size}&page=${this.page}`;
   
   ngOnInit():void {
     this.getAllPosts();

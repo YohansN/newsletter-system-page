@@ -1,21 +1,26 @@
 <ul>
     
     @for (post of posts; track post) {
-        <li>
-            <mat-card class="post-card">
-                <mat-card-content>
-                    <mat-card-title class="title"> {{post.title}} </mat-card-title>
-                    <mat-card-subtitle> {{post.synopsis}} </mat-card-subtitle>
-                    <p class="extra-info"> {{post.author}} • {{post.releaseDate}} </p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <mat-icon aria-hidden="false" aria-label="Share icon" fontIcon="share" class="share-icon"></mat-icon>
-                </mat-card-actions>
-            </mat-card>
-        </li>
+            <li>
+
+                <mat-card class="post-card">
+                    <a href="github.com/YohansN" target="_blank">
+                        <mat-card-content>                
+                            <mat-card-title class="title"> {{post.title}} </mat-card-title>
+                            <mat-card-subtitle> {{post.synopsis}} </mat-card-subtitle>
+                            <p class="extra-info"> {{post.author}} • {{post.releaseDate}} </p>
+                        </mat-card-content>
+                    </a>
+                    <mat-card-actions>
+                        <mat-icon aria-hidden="false" aria-label="Share icon" fontIcon="share" class="share-icon"></mat-icon>
+                    </mat-card-actions>
+                </mat-card>
+                
+            </li>
     }
-    @empty {
-        <p>CARREGANDO...</p>
+
+    @if (posts.length === 0){
+        <p class="posts-not-found">Nenhum publicação foi encontrada.</p>
     }
-    
+
 </ul>
