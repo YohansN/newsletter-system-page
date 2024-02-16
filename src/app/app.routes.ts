@@ -4,16 +4,8 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
 import { PostCardComponent } from './components/post-card/post-card.component';
 
 export const routes: Routes = [
-    {
-        path: "",
-        component: HomeComponent
-    },
-    {
-        path: "text-editor",
-        component: TextEditorComponent 
-    },
-    {
-        path: "component-test",
-        component: PostCardComponent
-    }
+    { path: "", component: HomeComponent },
+    { path: "text-editor", component: TextEditorComponent },
+    { path: "component-test", component: PostCardComponent },
+    { path: "**", redirectTo: "" }
 ];
