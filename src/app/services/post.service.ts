@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PostDetails } from '../interfaces/PostDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class PostService {
 
   apiUrl = "http://localhost:8080/post?size=10";
 
-  getAllPosts(): Observable<any[]>{
-    return this.httpClient.get<any[]>(this.apiUrl);
+  getAllPosts(): Observable<PostDetails[]>{
+    return this.httpClient.get<PostDetails[]>(this.apiUrl);
   }
 }
