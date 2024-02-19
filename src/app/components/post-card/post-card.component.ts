@@ -6,23 +6,21 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { PostService } from '../../services/post.service';
+import { PostDetails } from '../../interfaces/PostDetails';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatProgressBarModule, MatIconModule, HttpClientModule],
+  imports: [MatCardModule, MatDividerModule, MatButtonModule, MatProgressBarModule, MatIconModule, HttpClientModule, CommonModule],
   providers: [ PostService ],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.scss'
 })
 export class PostCardComponent {
-  title: string = "Título do nosso post!";
-  synopsis: string = "Sinopse do texto";
-  author: string = "Autor";
-  releaseDate: string = "01/10/2002";
   
   constructor(private postService: PostService) {}
-  posts: any = [];
+  posts:PostDetails[] = [];
   
   ngOnInit():void {
     this.postService.getAllPosts().subscribe((data) => (this.posts = data));
