@@ -8,6 +8,7 @@ export const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "text-editor", component: TextEditorComponent },
     { path: "post", component: PostPageComponent },
+    { path: "publicacao/:id", component: PostPageComponent },
     { path: "component-test", component: PostCardComponent },
     { path: "**", redirectTo: "" }
 ];
