@@ -1,0 +1,40 @@
+.card-container{
+  margin: 0 30rem;
+}
+
+h1{
+  margin: 2rem;
+  padding: 2rem;
+  color: white;
+  background-color: rgb(25, 181, 248);
+  text-align: center;
+  font-weight: bold;
+}
+
+.form-inputs{
+  border: 1px dotted green;
+}
+
+.mat-form-field{
+  padding-top: 2rem;
+  min-width: 30rem;
+  height: 8rem;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+  
+.example-full-width {
+  width: 100%;
+}
+  
+td {
+  padding-right: 8px;
+}
+
+.ckeditor{
+  width: 100%;
+  min-height: 40rem;
+}

@@ -1,0 +1,36 @@
+
+
+<mat-card class="card-container">
+    <h1>Página de pulicação</h1>
+    <mat-card-content>
+        <form [formGroup]="applyForm">
+            <div class="form-inputs">
+                
+                <table class="example-full-width" cellspacing="0"><tr>
+                    <td><mat-form-field class="example-full-width">
+                        <mat-label>Titulo</mat-label>
+                        <input matInput formControlName="title">
+                    </mat-form-field></td>
+                    <td><mat-form-field class="example-full-width">
+                        <mat-label>Autor(a)</mat-label>
+                        <input matInput formControlName="author">
+                    </mat-form-field></td>
+                </tr></table>
+                
+                <p>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Sinopse</mat-label>
+                        <textarea matInput formControlName="synopsis"></textarea>
+                    </mat-form-field>
+                </p>
+
+                <ckeditor class="ckeditor" [config]="{placeholder: 'Escreva seu texto aqui.'}" [editor]="Editor" formControlName="content"></ckeditor>
+            </div>
+        </form>
+
+        <mat-card-actions class="button-container">
+            <button mat-raised-button class="publish-button" (click)="submitPostForm()">Publicar!</button>
+        </mat-card-actions>
+
+    </mat-card-content>
+</mat-card>
