@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { TextEditorComponent } from '../../components/text-editor/text-editor.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
@@ -10,18 +9,22 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PublishPost } from '../../interfaces/PublishPost';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatDialog, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { SucessDialogComponent } from '../../components/sucess-dialog/sucess-dialog.component';
+import { LoadingDialogComponent } from '../../components/loading-dialog/loading-dialog.component';
 
 @Component({
   selector: 'app-text-editor-page',
   standalone: true,
-  imports: [TextEditorComponent, MatFormFieldModule, MatInputModule, MatButtonModule, FormsModule, ReactiveFormsModule, MatCardModule, CKEditorModule, MatSnackBarModule],
+  imports: [TextEditorPageComponent, MatFormFieldModule, MatInputModule, MatButtonModule, 
+    FormsModule, ReactiveFormsModule, MatCardModule, CKEditorModule, MatSnackBarModule,
+    MatButtonModule, SucessDialogComponent, MatDialogTitle, LoadingDialogComponent],
   templateUrl: './text-editor-page.component.html',
   styleUrl: './text-editor-page.component.scss'
 })
 export class TextEditorPageComponent {
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar, public sucessDialog: MatDialog, public loadingDialog: MatDialog) {}
 
   public Editor = ClassicEditor;
 
@@ -36,7 +39,22 @@ export class TextEditorPageComponent {
 
   submitPostForm(){
     const postData: PublishPost = this.applyForm.value as PublishPost;
-    this.postService.publishPost(postData).subscribe(data => console.log(data), error => this.onError());
+    this.onSubmit();
+    this.postService.publishPost(postData).subscribe(data => {
+      this.loadingDialog.closeAll();
+      this.onSucess();
+    }, error => {
+      this.loadingDialog.closeAll();
+      this.onError()
+    });
+  }
+
+  onSubmit(){
+    this.loadingDialog.open(LoadingDialogComponent);
+  }
+
+  onSucess(){
+    this.sucessDialog.open(SucessDialogComponent);
   }
 
   private onError(){
