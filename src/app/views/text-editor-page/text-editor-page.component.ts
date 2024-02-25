@@ -9,22 +9,25 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PublishPost } from '../../interfaces/PublishPost';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatDialog, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialog, MatDialogTitle } from '@angular/material/dialog';
 import { SucessDialogComponent } from '../../components/sucess-dialog/sucess-dialog.component';
 import { LoadingDialogComponent } from '../../components/loading-dialog/loading-dialog.component';
+import { ConfirmPublishDialogComponent } from '../../components/confirm-publish-dialog/confirm-publish-dialog.component';
+import { PublishConfirmationService } from '../../services/publish-confirmation.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-text-editor-page',
   standalone: true,
   imports: [TextEditorPageComponent, MatFormFieldModule, MatInputModule, MatButtonModule, 
     FormsModule, ReactiveFormsModule, MatCardModule, CKEditorModule, MatSnackBarModule,
-    MatButtonModule, SucessDialogComponent, MatDialogTitle, LoadingDialogComponent],
+    MatButtonModule, SucessDialogComponent, MatDialogTitle, LoadingDialogComponent, ConfirmPublishDialogComponent],
   templateUrl: './text-editor-page.component.html',
   styleUrl: './text-editor-page.component.scss'
 })
 export class TextEditorPageComponent {
 
-  constructor(private _snackBar: MatSnackBar, public sucessDialog: MatDialog, public loadingDialog: MatDialog) {}
+  constructor(private _snackBar: MatSnackBar, public sucessDialog: MatDialog, public loadingDialog: MatDialog, public confirmPublish: MatDialog) {}
 
   public Editor = ClassicEditor;
 
@@ -36,6 +39,22 @@ export class TextEditorPageComponent {
   });
   
   postService = inject(PostService);
+  publishConfirmationService = inject(PublishConfirmationService);
+
+  //Recebe a notificação do evento de click de confirmação do modal/dialog PublishConfirmationService. 
+  private subscription: Subscription = new Subscription();
+  ngOnInit(){
+    this.subscription = this.publishConfirmationService.publishConfirmed$.subscribe(() => {
+      this.submitPostForm();
+    })
+  }
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
+  confirmSubmitPostForm(){
+    this.confirmPublish.open(ConfirmPublishDialogComponent);
+  }
 
   submitPostForm(){
     const postData: PublishPost = this.applyForm.value as PublishPost;
