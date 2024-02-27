@@ -1,20 +1,20 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { PostService } from '../../services/post.service';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {PostService} from '../../services/post.service';
 import {MatCardModule} from '@angular/material/card';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { PublishPost } from '../../interfaces/PublishPost';
+import {PublishPost} from '../../interfaces/PublishPost';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatDialog, MatDialogTitle } from '@angular/material/dialog';
-import { SucessDialogComponent } from '../../components/sucess-dialog/sucess-dialog.component';
-import { LoadingDialogComponent } from '../../components/loading-dialog/loading-dialog.component';
-import { ConfirmPublishDialogComponent } from '../../components/confirm-publish-dialog/confirm-publish-dialog.component';
-import { PublishConfirmationService } from '../../services/publish-confirmation.service';
-import { Subscription } from 'rxjs';
+import {MatDialog, MatDialogTitle} from '@angular/material/dialog';
+import {SucessDialogComponent} from '../../components/sucess-dialog/sucess-dialog.component';
+import {LoadingDialogComponent} from '../../components/loading-dialog/loading-dialog.component';
+import {ConfirmPublishDialogComponent} from '../../components/confirm-publish-dialog/confirm-publish-dialog.component';
+import {PublishConfirmationService} from '../../services/publish-confirmation.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-text-editor-page',
@@ -32,11 +32,16 @@ export class TextEditorPageComponent {
   public Editor = ClassicEditor;
 
   applyForm = new FormGroup({
-    title: new FormControl(""),
-    synopsis: new FormControl(""),
-    author: new FormControl(""),
-    content: new FormControl("")
+    title: new FormControl("", [Validators.required, Validators.maxLength(256)]),
+    synopsis: new FormControl("", Validators.maxLength(256)),
+    author: new FormControl("", [Validators.required, Validators.maxLength(256)]),
+    content: new FormControl("", [Validators.required])
   });
+
+  //Retorna os valores dos campos do formulario
+  get title(){ return this.applyForm.get("title")!; }
+  get author(){ return this.applyForm.get("author")!; }
+  get content(){ return this.applyForm.get("content")!; }
   
   postService = inject(PostService);
   publishConfirmationService = inject(PublishConfirmationService);
@@ -53,10 +58,18 @@ export class TextEditorPageComponent {
   }
 
   confirmSubmitPostForm(){
+    if(this.applyForm.invalid){
+      this.title.markAllAsTouched();
+      this.author.markAllAsTouched();
+      this.content.markAllAsTouched();
+      return;
+    }
+
+      
     this.confirmPublish.open(ConfirmPublishDialogComponent);
   }
 
-  submitPostForm(){
+  private submitPostForm(){
     const postData: PublishPost = this.applyForm.value as PublishPost;
     this.onSubmit();
     this.postService.publishPost(postData).subscribe(data => {
@@ -68,12 +81,13 @@ export class TextEditorPageComponent {
     });
   }
 
-  onSubmit(){
+  private onSubmit(){
     this.loadingDialog.open(LoadingDialogComponent);
   }
 
-  onSucess(){
+  private onSucess(){
     this.sucessDialog.open(SucessDialogComponent);
+    this.applyForm.reset();
   }
 
   private onError(){

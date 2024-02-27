@@ -3,18 +3,34 @@
 <mat-card class="card-container">
     <h1>Página de pulicação</h1>
     <mat-card-content>
-        <form [formGroup]="applyForm">
+        <form [formGroup]="applyForm" #f="ngForm">
             <div class="form-inputs">
                 
                 <table class="example-full-width" cellspacing="0"><tr>
-                    <td><mat-form-field class="example-full-width">
-                        <mat-label>Titulo</mat-label>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                        <mat-label>Título</mat-label>
                         <input matInput formControlName="title">
-                    </mat-form-field></td>
-                    <td><mat-form-field class="example-full-width">
+                        </mat-form-field>
+                        @if (title.hasError('required') && title.touched) {
+                            <mat-error>O título é <strong>obrigatório</strong></mat-error>
+                        }
+                        @if (title.hasError('maxLength')){
+                            <mat-error>O título deve ter no <strong>máximo 256 caracteres</strong>.</mat-error>
+                        }
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
                         <mat-label>Autor(a)</mat-label>
                         <input matInput formControlName="author">
-                    </mat-form-field></td>
+                        </mat-form-field>
+                        @if (author.hasError('required') && author.touched) {
+                            <mat-error>O nome do autor é <strong>obrigatório</strong></mat-error>
+                        }
+                        @if (title.hasError('maxLength')){
+                            <mat-error>O título deve ter no <strong>máximo 256 caracteres</strong>.</mat-error>
+                        }
+                    </td>
                 </tr></table>
                 
                 <p>
@@ -25,6 +41,9 @@
                 </p>
 
                 <ckeditor class="ckeditor" [config]="{placeholder: 'Escreva seu texto aqui.'}" [editor]="Editor" formControlName="content"></ckeditor>
+                @if (content.hasError('required') && content.touched) {
+                    <mat-error>O conteúdo é <strong>obrigatório</strong></mat-error>
+                }
             </div>
         </form>
 
