@@ -15,8 +15,8 @@ export class PostService {
 
   apiUrl = "http://localhost:8080/post";
   
-  getAllPosts(): Observable<PostDetails[]>{
-    return this.httpClient.get<PostDetails[]>(`${this.apiUrl}`);
+  getAllPosts(size: number = 10, page: number = 0): Observable<PostDetails[]>{
+    return this.httpClient.get<PostDetails[]>(`${this.apiUrl}?size=${size}&page=${page}`);
   }
 
   getPostById(id: number): Observable<Post>{
@@ -26,5 +26,9 @@ export class PostService {
   publishPost(post: PublishPost): Observable<PublishPost>{
     //console.log(post);
     return this.httpClient.post<PublishPost>(`${this.apiUrl}`, post);
+  }
+
+  getTotalNumberOfPosts() : Observable<number>{
+    return this.httpClient.get<number>(`${this.apiUrl}/count`);
   }
 }

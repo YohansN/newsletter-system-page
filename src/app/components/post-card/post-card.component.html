@@ -23,4 +23,13 @@
         <p class="posts-not-found">Nenhum publicação foi encontrada.</p>
     }
 
+    <mat-paginator #paginator
+               class="paginator"
+               (page)="handlePageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+</mat-paginator>
+
 </ul>
