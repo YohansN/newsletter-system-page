@@ -1,0 +1,20 @@
+@import '../../../styles.scss';
+
+header{
+    align-items: center;
+}
+
+h1{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 4rem;
+    color: $primary-text-color;
+}
+
+hr{
+    border: 0.1rem solid #e1e1e1;
+}
