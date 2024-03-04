@@ -2,13 +2,14 @@
 
 //Fonts:
 @import 'https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap'; //"Courier Prime", monospace
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap';  //font-family: "Inter", sans-serif;
 
 //Colors:
-$primary-color: #FAFAFA;
-$secondary-color: #E7E7E7;
-$action-color: #265073;
-$primary-text-color: #212121;
-$secondary-text-color: #474747;
+$primary-color: #ffffff;
+$secondary-color: #F1F1F1;
+$action-color: #ED1A1A;
+$primary-text-color: #303030;
+$secondary-text-color: #424242;
 
 //Font-Size:
 
@@ -17,6 +18,6 @@ body {
 	box-sizing: border-box;
 	text-decoration: none;
     list-style: none;
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: #FAFAFA;
+    font-family: "Inter", sans-serif;
+    background-color: $primary-color;
 }
