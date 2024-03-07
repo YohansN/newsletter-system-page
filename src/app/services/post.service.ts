@@ -11,7 +11,6 @@ import { PublishPost } from '../interfaces/PublishPost';
 })
 export class PostService {
   httpClient = inject(HttpClient);
-  //constructor(private httpClient: HttpClient) {}
 
   apiUrl = "http://localhost:8080/post";
   
