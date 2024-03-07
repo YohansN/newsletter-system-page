@@ -5,10 +5,11 @@
             <p id="synopsis">{{post.synopsis}}</p>
             <p><span id="author">{{post.author.toString() | uppercase}}</span> • <span id="release-date">{{post.publicationDate | date:"dd/MM/yy"}}</span> </p>
         </div>
-        
+        <hr class="custom-line">
         <div class="content-container">
             <p [innerHTML]=post.content></p>
         </div>
+        <hr class="custom-line">
     }
     @else{
         <p>Carregando...</p>
