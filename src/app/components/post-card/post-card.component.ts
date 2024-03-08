@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {MatInputModule} from '@angular/material/input';
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
+import { PublicationOrderFilterService } from '../../services/publication-order-filter.service';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'app-post-card',
@@ -24,20 +26,30 @@ import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
 export class PostCardComponent {
   
   postService = inject(PostService);
+  filterOrderService = inject(PublicationOrderFilterService);
 
   posts:PostDetails[] = [];
-
+  filterOrder : string = "desc";
 
   ngOnInit():void {
-    this.postService.getAllPosts(this.pageSize, this.pageIndex).subscribe((data) => (this.posts = data));
+
+    //Muda a order da busca por publicação (apenas quando o chips é apertado).
+    this.filterOrderService.filterOrderValue.pipe(skip(1)).subscribe((order) => {
+      this.filterOrder = order;
+      this.postService.getAllPosts(this.pageSize, this.pageIndex, this.filterOrder).subscribe((data) => (this.posts = data));
+    });
+
+    //Faz o primeiro request get
+    this.postService.getAllPosts(this.pageSize, this.pageIndex, this.filterOrder).subscribe((data) => (this.posts = data));
+    
     this.postService.getTotalNumberOfPosts().subscribe((data) => (this.length = data));
+    
   }
 
   //Configurações de paginação
-  length = 0; //Valor vem da api  
+  length = 0; //Valor vem da api
   pageSize = 10;
   pageIndex = 0;
-
 
   pageEvent: PageEvent = new PageEvent;
 
@@ -46,7 +58,7 @@ export class PostCardComponent {
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
 
-    this.postService.getAllPosts(this.pageSize, this.pageIndex).subscribe((data) => (this.posts = data));
+    this.postService.getAllPosts(this.pageSize, this.pageIndex, this.filterOrder).subscribe((data) => (this.posts = data));
   }
 
 }

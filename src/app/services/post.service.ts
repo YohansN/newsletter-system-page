@@ -14,8 +14,8 @@ export class PostService {
 
   apiUrl = "http://localhost:8080/post";
   
-  getAllPosts(size: number = 10, page: number = 0): Observable<PostDetails[]>{
-    return this.httpClient.get<PostDetails[]>(`${this.apiUrl}?size=${size}&page=${page}`);
+  getAllPosts(size: number = 10, page: number = 0, sort: string = "desc"): Observable<PostDetails[]>{
+    return this.httpClient.get<PostDetails[]>(`${this.apiUrl}?size=${size}&page=${page}&sort=publicationDate,${sort}`);
   }
 
   getPostById(id: number): Observable<Post>{

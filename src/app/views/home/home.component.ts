@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PostCardComponent } from '../../components/post-card/post-card.component';
+import { FilterChipsComponent } from '../../components/filter-chips/filter-chips.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [PostCardComponent],
+  imports: [FilterChipsComponent, PostCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

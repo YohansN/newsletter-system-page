@@ -22,8 +22,10 @@
     @if (posts.length === 0){
         <p class="posts-not-found">Nenhum publicação foi encontrada.</p>
     }
+    
+</ul>
 
-    <mat-paginator #paginator
+<mat-paginator #paginator
                class="paginator"
                (page)="handlePageEvent($event)"
                [length]="length"
@@ -31,5 +33,3 @@
                [pageIndex]="pageIndex"
                aria-label="Select page">
 </mat-paginator>
-
-</ul>
