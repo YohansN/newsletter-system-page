@@ -1,0 +1,23 @@
+nav{
+    width: 30rem;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    padding: 1rem;
+    //border: 1px red dashed;
+
+    p{
+        margin: 0;
+        cursor: pointer;
+    }
+}
+
+.custom-line{
+    border: 0.1rem solid #e1e1e1;
+    border-radius: 25px;
+}
+
+.active-page{
+    color: red;
+    font-weight: 500;
+}
