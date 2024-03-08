@@ -1,10 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use '@angular/material' as mat;
+@include mat.core();
+
 //Fonts:
 @import 'https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap'; //"Courier Prime", monospace
 @import 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap';  //font-family: "Inter", sans-serif;
 
 //Colors:
+$custom-light-primary: mat.define-palette(mat.$gray-palette, 100);
+$custom-accent: mat.define-palette(mat.$red-palette, 600);
+
+$custom-light-theme: mat.define-light-theme((
+ color: (
+   primary: $custom-light-primary,
+   accent: $custom-accent,
+ ),
+ typography: mat.define-typography-config(),
+ density: 0,
+));
+
+@include mat.all-component-themes($custom-light-theme);
+
+
 $primary-color: #ffffff;
 $secondary-color: #F1F1F1;
 $action-color: #ED1A1A;
