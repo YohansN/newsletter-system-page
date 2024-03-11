@@ -15,12 +15,13 @@ import { PublicationOrderFilterService } from '../../services/publication-order-
 import { skip } from 'rxjs';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
   imports: [MatCardModule, MatDividerModule, MatButtonModule, MatProgressBarModule, MatIconModule, 
-    HttpClientModule, CommonModule, RouterModule, MatInputModule, MatPaginatorModule],
+    HttpClientModule, CommonModule, RouterModule, MatInputModule, MatPaginatorModule, MatTooltipModule],
   providers: [],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.scss'
