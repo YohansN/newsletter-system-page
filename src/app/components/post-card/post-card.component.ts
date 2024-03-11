@@ -13,6 +13,8 @@ import {MatInputModule} from '@angular/material/input';
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
 import { PublicationOrderFilterService } from '../../services/publication-order-filter.service';
 import { skip } from 'rxjs';
+import {Clipboard} from '@angular/cdk/clipboard';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post-card',
@@ -28,8 +30,11 @@ export class PostCardComponent {
   postService = inject(PostService);
   filterOrderService = inject(PublicationOrderFilterService);
 
+  constructor(private clipboard: Clipboard, private snackBar: MatSnackBar){}
+
   posts:PostDetails[] = [];
   filterOrder : string = "desc";
+  postUrl: string = '';
 
   ngOnInit():void {
 
@@ -44,6 +49,7 @@ export class PostCardComponent {
     
     this.postService.getTotalNumberOfPosts().subscribe((data) => (this.length = data));
     
+    this.postUrl = window.location.href;
   }
 
   //Configurações de paginação
@@ -59,6 +65,16 @@ export class PostCardComponent {
     this.pageIndex = e.pageIndex;
 
     this.postService.getAllPosts(this.pageSize, this.pageIndex, this.filterOrder).subscribe((data) => (this.posts = data));
+  }
+
+  //Botão de compartilhar link
+  copyLinkToClipBoard(postId: number){ 
+    this.clipboard.copy(`${this.postUrl}/publicacao/${postId}`);
+    this.openSnackBar();
+  }
+
+  private openSnackBar() {
+    this.snackBar.open("Link da publicação copiado!", 'Fechar' ,{duration: 4000});
   }
 
 }
