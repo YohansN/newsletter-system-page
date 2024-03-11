@@ -1,6 +1,7 @@
 nav{
-    width: 30rem;
+    max-width: 30rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     margin: 0 auto;
     padding: 1rem;
