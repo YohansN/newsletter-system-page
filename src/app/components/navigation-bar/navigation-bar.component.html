@@ -1,6 +1,6 @@
 <nav>
     <p routerLink="/" routerLinkActive="active-page" [routerLinkActiveOptions]="{exact:true}" >Home</p>
     <p routerLink="/sobre" routerLinkActive="active-page" [routerLinkActiveOptions]="{exact:true}" >Sobre</p>
-    <p>Compartilhar</p>
+    <p (click)="copyUrlToClibBoard()" matTooltip="Copiar endereço da página.">Compartilhar</p>
 </nav>
 <hr class="custom-line">
