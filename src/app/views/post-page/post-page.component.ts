@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Post } from '../../interfaces/Post';
 import { PostService } from '../../services/post.service';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-post-page',
   standalone: true,
-  imports: [MatDividerModule, CommonModule],
+  imports: [MatDividerModule, CommonModule, FooterComponent],
   providers: [],
   templateUrl: './post-page.component.html',
   styleUrl: './post-page.component.scss'

@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    min-height: 100vh;
 }
 
 .header-info{
@@ -48,4 +50,8 @@
     width: 80rem;
     border: 0.1rem solid #e1e1e1;
     border-radius: 25px;
+}
+
+.space{
+    padding-bottom: 26rem;
 }
