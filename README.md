@@ -1,27 +1,24 @@
-# NewsletterSystemPage
+# Newsletter System Page
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
+Newsletter System Page é a parte do Blog (Front-End) feita com Angular 17 que tem o intuito de concentrar as publicações e servir como gerenciamento do administrador para publicação de novos textos. Os textos são escritos utilizando um editor rico de texto.
 
-## Development server
+Essa aplicação tem algumas páginas como:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* Home, que concentra todos os textos publicados.
+  
+* About, que conta um pouco sobre o projeto.
+  
+* Página da publicação.
+  
+* Rich Text Editor, onde o administrador pode escrever os textos que serão publicados.
+  
 
-## Code scaffolding
+E funcionalidades como o cadastro de novos usuários, pesquisa por publicação (TO DO).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+Angular 17
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+[Angular Material](https://material.angular.io)
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[CKEditor](https://ckeditor.com)
