@@ -3,18 +3,18 @@
     
     <p class="description">Seja bem-vindo(a) à plataforma <strong>Newsletter</strong>.<br> Assine gratuitamente para receber as próximas publicações!</p>
     
-    <form class="subscription-form">
+    <form class="subscription-form" [formGroup]="subscribeForm">
         <mat-form-field appearance="outline" class="input-field">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Digite o seu nome">       
+            <input matInput placeholder="Digite o seu nome" formControlName="name">       
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="input-field">
             <mat-label>E-mail</mat-label>
-            <input matInput placeholder="Digite o seu E-mail">
+            <input matInput placeholder="Digite o seu E-mail" formControlName="email">
         </mat-form-field>
 
-        <button mat-raised-button color="accent">Assine</button>
+        <button mat-raised-button (click)="submitNewSubscription()" color="accent">Assine</button>
     </form>
 
 </section>

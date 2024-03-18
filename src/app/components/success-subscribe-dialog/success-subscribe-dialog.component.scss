@@ -1,0 +1,24 @@
+.dialog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+    .sucess-message{
+        color: #0DD877;
+        font-weight: 700;
+        font-size: 3rem;
+    }
+    
+    .material-symbols-outlined{
+        color: #0DD877;
+        font-size: 20rem;
+    }
+}
+
+.close-button{
+    justify-content: end;
+    padding: 0 2rem 2rem 0;
+}
+
+
