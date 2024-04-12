@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class SubscriberService {
   httpClient = inject(HttpClient);
 
-  apiUrl = "http://localhost:8080/subscriber";
+  apiUrl = "http://localhost:8080/api/v1/subscriber";
 
   newSubscriber(subscriber: UserSubscriber): Observable<UserSubscriber> {
     return this.httpClient.post<UserSubscriber>(`${this.apiUrl}`, subscriber);

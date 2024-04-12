@@ -19,34 +19,43 @@ import { MatDialog } from '@angular/material/dialog';
 export class SubscribePanelComponent {
   subscriberService = inject(SubscriberService);
   
-  constructor (private errorSnackBar: MatSnackBar, public dialog: MatDialog){
-
-  }
+  constructor (private errorSnackBar: MatSnackBar, public dialog: MatDialog){  }
+  
   subscribeForm = new FormGroup({
-    name: new FormControl(""),
-    email: new FormControl(""),
+    name: new FormControl("",[Validators.required, Validators.maxLength(256)]),
+    email: new FormControl("",[Validators.email, Validators.required]),
   })
 
+  get name(){ return this.subscribeForm.get("name")!; }
+  get email(){ return this.subscribeForm.get("email")!; }
+
   submitNewSubscription(){
-    //this.openSuccessDialog(); //Para testes
+    if(!this.formIsValid()){
+      return;
+    }
 
     const userData: UserSubscriber = this.subscribeForm.value as UserSubscriber;
     this.subscriberService.newSubscriber(userData).subscribe({
       next: (data) => {
-        this.openSuccessDialog();
+        this.dialog.open(SuccessSubscribeDialogComponent);
         this.subscribeForm.reset();
+        console.log(data);
       },
-      error: (error) => {
-        this.onError();
+      error: (err) => {
+        this.onError(err.error.message);
       }
     });
   }
 
-  private onError(){
-    this.errorSnackBar.open("Ocorreu um erro ao cadastrar. Por favor tente mais tarde.", "Fechar", {duration: 10000});
+  private formIsValid(): Boolean{
+    if(this.subscribeForm.invalid){
+      this.subscribeForm.markAllAsTouched();
+      return false;
+    }
+    return true;
   }
-  
-  private openSuccessDialog() {
-    this.dialog.open(SuccessSubscribeDialogComponent);
+
+  private onError(errorMessage: String ){
+    this.errorSnackBar.open("Erro ao cadastrar: "+ errorMessage, "Fechar", {duration: 10000});
   }
 }

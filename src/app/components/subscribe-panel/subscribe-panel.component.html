@@ -1,7 +1,9 @@
 <section class="subscribe-panel">
     <img src="" alt="">
     
-    <p class="description">Seja bem-vindo(a) à plataforma <strong>Newsletter</strong>.<br> Assine gratuitamente para receber as próximas publicações!</p>
+    <p class="description">
+        Seja bem-vindo(a) à plataforma <strong>Newsletter</strong>.<br> Assine gratuitamente para receber as próximas publicações!
+    </p>
     
     <form class="subscription-form" [formGroup]="subscribeForm">
         <mat-form-field appearance="outline" class="input-field">
@@ -13,6 +15,21 @@
             <mat-label>E-mail</mat-label>
             <input matInput placeholder="Digite o seu E-mail" formControlName="email">
         </mat-form-field>
+
+        <div class="validation-errors-message">
+            @if (name.hasError('required') && name.touched) {
+                <mat-error>* O campo nome deve ser preenchido.</mat-error>
+            }
+            @if (name.hasError('maxlength')) {
+                <mat-error>* O campo nome deve ter no máximo 256 caracteres.</mat-error>
+            }
+            @if (email.hasError('required') && email.touched) {
+                <mat-error>* O campo email deve ser preenchido.</mat-error>
+            }
+            @if (email.hasError('email') && email.touched) {
+                <mat-error>* O E-mail deve ser válido.</mat-error>
+            }
+        </div>
 
         <button mat-raised-button (click)="submitNewSubscription()" color="accent">Assine</button>
     </form>
